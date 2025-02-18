@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider-Man: ¿Quieres ser mi camino?</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Contenedor del video de fondo */
+        #video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* Video de fondo ajustado a 16:9 */
+        #spiderman-video {
+            width: 100%;
+            height: 100%;
+            max-width: 177.78vh; /* 16:9 basado en la altura */
+            max-height: 56.25vw; /* 16:9 basado en el ancho */
+            object-fit: cover;
+            opacity: 0.7; /* Opacidad para que no distraiga demasiado */
+        }
+
+        /* Contenedor principal */
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animación de la pregunta */
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            animation: pulse 2s infinite;
+            cursor: pointer; /* Cambia el cursor al pasar sobre la pregunta */
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Estilos del botón de reproducir/pausar música */
+        #play-pause-button {
+            position: fixed;
+            bottom: 20px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: #e62429;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        #play-pause-button:hover {
+            background: #ff0000;
+            transform: scale(1.1);
+        }
+
+        /* Estilos del video interactivo */
+        #interactive-video-container {
+            display: none;
+            margin-top: 30px;
+        }
+
+        #interactive-video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor del video de fondo -->
+    <div id="video-container">
+        <video id="spiderman-video" autoplay muted loop>
+            <source src="spiderman_video.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+    </div>
+
+    <div class="container">
+        <!-- Pregunta con animación -->
+        <h1>¿Quieres ser mi camino?</h1>
+
+        <!-- Contenedor del video interactivo -->
+        <div id="interactive-video-container">
+            <video id="interactive-video" controls>
+                <source src="tu_video.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+    </div>
+
+    <!-- Botón para reproducir/pausar la canción -->
+    <button id="play-pause-button" onclick="toggleSong()">Pausar música</button>
+
+    <!-- Audio de fondo -->
+    <audio id="song">
+        <source src="tu_cancion.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <script>
+        // Función para reproducir/pausar la canción
+        function toggleSong() {
+            const song = document.getElementById('song');
+            const playPauseButton = document.getElementById('play-pause-button');
+
+            if (song.paused) {
+                song.play();
+                playPauseButton.textContent = 'Pausar música';
+            } else {
+                song.pause();
+                playPauseButton.textContent = 'Reproducir música';
+            }
+        }
+
+        // Función para mostrar el video interactivo
+        function showVideo() {
+            const videoContainer = document.getElementById('interactive-video-container');
+            const interactiveVideo = document.getElementById('interactive-video');
+
+            // Mostrar el video y reproducirlo
+            videoContainer.style.display = 'block';
+            interactiveVideo.play();
+
+            // Cambiar el texto de la pregunta
+            document.querySelector('h1').textContent = '¡Gracias por ser mi camino!';
+        }
+
+        // Escuchar clic en la pregunta para mostrar el video
+        document.querySelector('h1').addEventListener('click', showVideo);
+    </script>
+</body>
+</html>
